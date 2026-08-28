@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAYA Mayorista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --negro:#171717;
+    --crema:#EDE7D3;
+    --crema-suave:#F7F4EA;
+    --gris:#8a8a8a;
+    --dorado:#b89021;
+    --blanco:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Red Hat Display',sans-serif;color:var(--negro);background:var(--blanco)}
+  img{max-width:100%;display:block}
+
+  /* ---------- header ---------- */
+  header{text-align:center;padding:42px 16px 0}
+  .logo{font-family:'Cinzel',serif;font-size:46px;letter-spacing:.18em;font-weight:400}
+  .sublogo{font-size:16px;letter-spacing:.42em;margin-top:2px;text-indent:.42em}
+  .ornament{display:flex;align-items:center;justify-content:center;gap:12px;margin:20px auto 0;max-width:420px}
+  .ornament .line{flex:1;height:1px;background:var(--negro)}
+  .ornament .diamond{width:7px;height:7px;background:transparent;border:1px solid var(--negro);transform:rotate(45deg)}
+
+  /* ---------- intro ---------- */
+  .intro{max-width:640px;margin:26px auto 0;padding:0 20px;text-align:center;font-size:15.5px;line-height:1.55}
+  .pasos{display:flex;justify-content:center;gap:34px;margin:26px auto 0;flex-wrap:wrap;padding:0 16px}
+  .paso{display:flex;align-items:center;gap:10px;font-size:13.5px}
+  .paso .num{width:26px;height:26px;border-radius:50%;background:var(--negro);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12.5px;flex-shrink:0}
+
+  /* ---------- section band ---------- */
+  .banda{background:var(--crema);text-align:center;padding:13px 16px;margin-top:44px}
+  .banda h2{font-family:'Cinzel',serif;font-size:19px;letter-spacing:.14em;font-weight:400}
+  .banda .sub{font-size:12.5px;letter-spacing:.1em;margin-top:3px;color:#555}
+
+  section{max-width:1080px;margin:0 auto;padding:34px 20px 10px}
+
+  /* ---------- combo stand ---------- */
+  .combo{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:center}
+  .combo-foto{background:var(--crema-suave);border:1px solid #e5dfc9;padding:14px}
+  .combo-info h3{font-size:22px;font-weight:700;margin-bottom:14px}
+  .combo-info ul{list-style:none;margin:0 0 18px}
+  .combo-info li{padding-left:18px;position:relative;margin-bottom:7px;font-size:15px}
+  .combo-info li::before{content:"";position:absolute;left:2px;top:8px;width:5px;height:5px;background:var(--negro);border-radius:50%}
+  .precio-grande{display:inline-block;background:var(--crema);border:1px solid var(--negro);border-radius:10px;padding:10px 22px;font-size:26px;font-weight:700;margin-bottom:8px}
+  .nota-iva{font-size:12.5px;color:var(--gris);margin-bottom:16px}
+  .pvp-lista{font-size:12.5px;color:var(--gris);line-height:1.6;margin-bottom:18px}
+
+  /* ---------- product grid ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:26px;margin-top:8px}
+  .card{text-align:center;display:flex;flex-direction:column}
+  .card .foto{position:relative;background:var(--crema-suave);overflow:hidden}
+  .card .foto img{aspect-ratio:1/1;object-fit:cover;width:100%}
+  .badge-nuevo{position:absolute;top:10px;left:10px;background:var(--negro);color:#fff;font-size:10px;font-weight:700;letter-spacing:.12em;padding:4px 9px;border-radius:20px}
+  .chip-precio{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:var(--crema);border:1px solid var(--negro);border-radius:8px;padding:5px 14px;font-size:16.5px;font-weight:700;white-space:nowrap}
+  .card h4{font-size:14.5px;font-weight:700;margin:13px 6px 3px;min-height:36px}
+  .pvp{font-size:11.5px;color:var(--gris)}
+  .stepper{display:flex;align-items:center;justify-content:center;gap:0;margin-top:11px}
+  .stepper button{width:32px;height:32px;border:1px solid var(--negro);background:#fff;font-size:16px;cursor:pointer;font-family:inherit;transition:background .15s}
+  .stepper button:hover{background:var(--crema)}
+  .stepper button:first-child{border-radius:6px 0 0 6px}
+  .stepper button:last-child{border-radius:0 6px 6px 0}
+  .stepper .qty{width:44px;height:32px;border-top:1px solid var(--negro);border-bottom:1px solid var(--negro);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14.5px}
+
+  /* reposición */
+  .repo-head{background:var(--crema-suave);border:1px solid #e5dfc9;border-radius:10px;padding:16px 20px;margin:34px 0 24px;display:flex;gap:26px;align-items:center;flex-wrap:wrap;justify-content:center}
+  .repo-head .titulo{font-weight:700;font-size:15.5px}
+  .repo-head .tarifa{font-size:14px}
+  .repo-head .tarifa b{font-size:16px}
+  .repo-estado{font-size:13px;margin-top:2px;color:var(--gris)}
+  .grid-tinturas{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:20px}
+  .grid-tinturas .card h4{font-size:13px;min-height:30px}
+  .grid-tinturas .chip-precio{font-size:13.5px;padding:4px 11px}
+
+  /* ---------- cart bar ---------- */
+  .cart-bar{position:fixed;bottom:0;left:0;right:0;background:var(--negro);color:#fff;display:none;align-items:center;justify-content:space-between;padding:13px 22px;z-index:50;gap:14px}
+  .cart-bar.visible{display:flex}
+  .cart-bar .resumen{font-size:14.5px}
+  .cart-bar .resumen b{font-size:17px}
+  .btn{border:none;cursor:pointer;font-family:inherit;font-weight:700;border-radius:8px;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-crema{background:var(--crema);color:var(--negro);padding:11px 22px;font-size:14.5px}
+
+  /* ---------- modal pedido ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center;z-index:100}
+  .overlay.open{display:flex}
+  .modal{background:#fff;width:100%;max-width:560px;max-height:88vh;border-radius:16px 16px 0 0;display:flex;flex-direction:column}
+  .modal-head{padding:20px 24px 12px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
+  .modal-head h3{font-family:'Cinzel',serif;font-size:17px;letter-spacing:.1em;font-weight:400}
+  .modal-head button{background:none;border:none;font-size:22px;cursor:pointer;line-height:1}
+  .modal-body{padding:14px 24px;overflow-y:auto;flex:1}
+  .linea-pedido{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:7px 0;border-bottom:1px dashed #e5e5e5}
+  .linea-pedido .cant{color:var(--gris);white-space:nowrap}
+  .aviso{background:var(--crema-suave);border:1px solid #e0d8ba;border-radius:8px;padding:10px 14px;font-size:13px;margin:12px 0}
+  .total-linea{display:flex;justify-content:space-between;font-size:17px;font-weight:700;padding:14px 0 6px}
+  .modal-body label{font-size:12.5px;font-weight:700;display:block;margin:10px 0 4px}
+  .modal-body input{width:100%;border:1px solid #ccc;border-radius:7px;padding:9px 12px;font-family:inherit;font-size:14px}
+  .modal-foot{padding:14px 24px 20px;border-top:1px solid #eee;display:flex;flex-direction:column;gap:9px}
+  .btn-wa{background:var(--negro);color:#fff;padding:14px;font-size:15px;display:flex;align-items:center;justify-content:center;gap:9px}
+  .btn-mail{background:#fff;color:var(--negro);border:1px solid var(--negro);padding:11px;font-size:13.5px}
+
+  footer{text-align:center;padding:48px 16px 120px;font-style:italic;font-size:14px}
+  footer a{color:var(--negro)}
+
+  @media(max-width:760px){
+    header{padding-top:30px}
+    .logo{font-size:34px}
+    .sublogo{font-size:13.5px}
+    .intro{font-size:14px;margin-top:20px}
+    .pasos{gap:9px;flex-direction:column;align-items:center;margin-top:20px}
+    .banda{margin-top:34px;padding:11px 12px}
+    .banda h2{font-size:14.5px;letter-spacing:.1em}
+    .banda .sub{font-size:11.5px}
+    section{padding:26px 14px 6px}
+    .combo{grid-template-columns:1fr;gap:20px}
+    .combo-foto{padding:10px}
+    .combo-info h3{font-size:19px}
+    .combo-info li{font-size:14px}
+    .precio-grande{font-size:22px;padding:9px 18px}
+    .repo-head{gap:12px;padding:14px 16px;text-align:center}
+    .grid{grid-template-columns:repeat(2,1fr);gap:16px 12px}
+    .grid-tinturas{grid-template-columns:repeat(2,1fr)}
+    .card h4{font-size:13px;min-height:32px}
+    .pvp{font-size:11px}
+    .chip-precio{font-size:14.5px;padding:4px 11px}
+    .stepper button{width:40px;height:40px;font-size:18px}
+    .stepper .qty{width:48px;height:40px}
+    .cart-bar{padding:11px 14px}
+    .btn-crema{padding:12px 18px;font-size:14px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">KAYA</div>
+  <div class="sublogo">MAYORISTA</div>
+  <div class="ornament"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+  <p class="intro">Sumá KAYA a tu punto de venta: adaptógenos y cosmética natural con respaldo científico.
+  Elegí los productos, armá tu pedido y envianoslo directo por WhatsApp.</p>
+  <div class="pasos">
+    <div class="paso"><span class="num">1</span> Elegí los productos</div>
+    <div class="paso"><span class="num">2</span> Revisá tu pedido</div>
+    <div class="paso"><span class="num">3</span> Envialo por WhatsApp</div>
+  </div>
+</header>
+
+<!-- ============ LÍNEA NEGRA ============ -->
+<div class="banda">
+  <h2>LÍNEA NEGRA &middot; ADAPTÓGENOS</h2>
+  <div class="sub">Stand mayorista + reposición de frascos</div>
+</div>
+
+<section>
+  <div class="combo">
+    <div class="combo-foto"><img src="assets/stand.png" alt="Stand KAYA Adaptógenos"></div>
+    <div class="combo-info">
+      <h3>Stand Mayorista Adaptógenos</h3>
+      <ul>
+        <li>1 stand para mesa</li>
+        <li>24 adaptógenos (3 de cada variedad) de 50ml</li>
+        <li>24 cajas (para cada adaptógeno)</li>
+        <li>1 libro explicativo con los kits y combinaciones</li>
+        <li>Stickers</li>
+      </ul>
+      <div class="precio-grande" id="precio-stand">$480.000</div>
+      <div class="nota-iva">Si se solicita Factura A, se aplica el IVA.</div>
+      <div class="pvp-lista">
+        <b>Precio de venta sugerido:</b><br>
+        1 adaptógeno: $35.000 &nbsp;·&nbsp; Por 3: $33.250 c/u &nbsp;·&nbsp; Por 5: $31.500 c/u
+      </div>
+      <div class="stepper" style="justify-content:flex-start">
+        <button onclick="mod('stand',-1)">&minus;</button>
+        <div class="qty" id="qty-stand">0</div>
+        <button onclick="mod('stand',1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="repo-head">
+    <div>
+      <div class="titulo">Reposición de adaptógenos &middot; frascos 50ml a elección</div>
+      <div class="repo-estado" id="repo-estado">Elegí al menos 24 frascos (combinalos como quieras)</div>
+    </div>
+    <div class="tarifa">24 frascos: <b>$17.500</b> c/u</div>
+    <div class="tarifa">48 frascos: <b>$15.000</b> c/u</div>
+  </div>
+  <div class="grid grid-tinturas" id="grid-tinturas"></div>
+  <p style="font-size:12.5px;color:var(--gris);margin-top:16px;font-style:italic">Incluye las cajitas y stickers.</p>
+</section>
+
+<!-- ============ LÍNEA BLANCA ============ -->
+<div class="banda">
+  <h2>LÍNEA BLANCA &middot; COSMÉTICA NATURAL</h2>
+  <div class="sub">Precio mayorista: 50% del precio de venta al público</div>
+</div>
+
+<section>
+  <div class="grid" id="grid-blanca"></div>
+</section>
+
+<footer>Conocé todo en <a href="https://kaya.com.ar" target="_blank">kaya.com.ar</a></footer>
+
+<!-- ============ CART BAR ============ -->
+<div class="cart-bar" id="cart-bar">
+  <div class="resumen"><span id="bar-items"></span> &nbsp;·&nbsp; <b id="bar-total"></b></div>
+  <button class="btn btn-crema" onclick="abrirPedido()">Ver pedido</button>
+</div>
+
+<!-- ============ MODAL ============ -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>TU PEDIDO</h3>
+      <button onclick="cerrarPedido()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="lineas-pedido"></div>
+      <div class="aviso" id="aviso-repo" style="display:none"></div>
+      <div class="total-linea"><span>Total</span><span id="modal-total"></span></div>
+      <label>Nombre del comercio / razón social</label>
+      <input id="f-comercio" placeholder="Ej: Farmacia del Centro">
+      <label>Tu nombre</label>
+      <input id="f-nombre" placeholder="Ej: María Pérez">
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-wa" onclick="enviarWA()">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Enviar pedido por WhatsApp
+      </button>
+      <button class="btn btn-mail" onclick="enviarMail()">Enviar por email</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =================== CONFIGURACIÓN =================== */
+const WHATSAPP = "5493510000000";   // <-- REEMPLAZAR por el número de Kaya (con código de país, sin +)
+const EMAIL = "hola@kaya.com.ar";   // <-- REEMPLAZAR por el mail de pedidos
+
+const CDN = "https://acdn-us.mitiendanube.com/stores/004/998/152/products/";
+
+/* Línea blanca: precio mayorista = 50% del precio de lista de kaya.com.ar */
+const BLANCA = [
+  {id:"leche",   n:"Leche de Limpieza Facial - Rosas",           lista:45000,  nuevo:true,  img:"leche-de-limpieza-d64865a5dab369e14017795445828310-1024-1024.webp"},
+  {id:"jabon",   n:"Jabón Líquido Corporal - Mango y Pitanga",   lista:40000,  nuevo:true,  img:"jabon-liquido-ffa351ce858a6c70d417795445652413-1024-1024.webp"},
+  {id:"shampoo", n:"Shampoo - Coco y Vainilla",                  lista:40000,  nuevo:true,  img:"shampoo-78acc70df9877979c417795445475589-1024-1024.webp"},
+  {id:"acond",   n:"Acondicionador - Coco y Karité",             lista:40000,  nuevo:true,  img:"acondicionador-ea887f214a1f454b8e17795445272136-1024-1024.webp"},
+  {id:"neceser", n:"Neceser KAYA®",                         lista:50000,  nuevo:true,  img:"neceser1-6d27aeb7142c704a1817741005380209-1024-1024.webp"},
+  {id:"bolso",   n:"Bolso KAYA®",                           lista:100000, nuevo:true,  img:"bolso1-2b3162a15885ab1cb217741002522196-1024-1024.webp"},
+  {id:"mosqueta",n:"Aceite de Rosa Mosqueta - 30ml",             lista:40000,  nuevo:false, img:"kaya-2025-05_12-baja-632c832d1f3c3818a117498374609591-1024-1024.webp"},
+  {id:"mist",    n:"Mist del Bosque - Bruma Botánica",           lista:35000,  nuevo:false, img:"kaya-2025-05_18-baja-7f82218d53dd06853d17498369610573-1024-1024.webp"},
+  {id:"perfume", n:"Perfume Oil - Lavanda",                      lista:25000,  nuevo:false, img:"45-8cfa336a4ec72cd1ac17456132434494-1024-1024.webp"},
+  {id:"guasha",  n:"Gua Sha - Ónix Blanco",                      lista:25000,  nuevo:false, img:"46-23934ecfc669bd294517456173641228-1024-1024.webp"},
+  {id:"antiage", n:"Crema Antiage - Día & Noche",                lista:40000,  nuevo:false, img:"54-a1f5b5c2e966ec8de017787722185066-1024-1024.webp"},
+  {id:"butter",  n:"Body Butter - Mango y Pitanga",              lista:40000,  nuevo:false, img:"42-82ec9f28026b9786a417456181564242-1024-1024.webp"},
+  {id:"micelar", n:"Agua Micelar de Rosas - 125ml",              lista:22000,  nuevo:false, img:"38-7a24502be5c02dc6c017456185218638-1024-1024.webp"},
+  {id:"joj125",  n:"Aceite de Jojoba - 125ml",                   lista:95000,  nuevo:false, img:"37-932f77265230dbec3d17456186663148-1024-1024.webp"},
+  {id:"joj60",   n:"Aceite de Jojoba - 60ml",                    lista:55000,  nuevo:false, img:"40-a7adea126884c5496117456189894306-1024-1024.webp"},
+  {id:"joj30",   n:"Aceite de Jojoba - 30ml",                    lista:29500,  nuevo:false, img:"39-5ff083a4150008f7e417456192123999-1024-1024.webp"},
+];
+
+/* Línea negra: reposición de frascos ($17.500 c/u desde 24 u., $15.000 c/u desde 48 u.) */
+const TINTURAS = [
+  {id:"melena",    n:"Melena de León",  img:"6-d94b21cb7f5e3ebd4c17455800481228-480-0.webp"},
+  {id:"ashwa",     n:"Ashwagandha",     img:"14-3e8a70d0ff4314383917455773695097-480-0.webp"},
+  {id:"cordyceps", n:"Cordyceps",       img:"10-e3d9deee33dfbef86a17455782600386-480-0.webp"},
+  {id:"reishi",    n:"Reishi",          img:"4-624d96c2aff3cce4da17455786623169-480-0.webp"},
+  {id:"tremella",  n:"Tremella",        img:"29-67f7cfc7212c8cbfa417498381123060-480-0.webp"},
+  {id:"shiitake",  n:"Shiitake",        img:"3-46c2b339f2a7c0cfd617455766544239-480-0.webp"},
+  {id:"ginseng",   n:"Ginseng",         img:"8-8493e0cb8fdc7eb04c17455281699991-480-0.webp"},
+  {id:"colapavo",  n:"Cola de Pavo",    img:"12-9d9dffbce3f46a908717455798270744-480-0.webp"},
+];
+
+const PRECIO_STAND = 480000;
+const REPO_24 = 17500, REPO_48 = 15000;
+
+/* =================== ESTADO =================== */
+const qty = {stand:0};
+BLANCA.forEach(p => qty[p.id] = 0);
+TINTURAS.forEach(p => qty[p.id] = 0);
+
+const fmt = n => "$" + n.toLocaleString("es-AR");
+
+/* =================== RENDER =================== */
+function cardHTML(p, chip, esNueva){
+  return `
+  <div class="card">
+    <div class="foto">
+      ${esNueva ? '<span class="badge-nuevo">NUEVO</span>' : ''}
+      <img src="${CDN}${p.img}" alt="${p.n}" loading="lazy">
+      <span class="chip-precio">${chip}</span>
+    </div>
+    <h4>${p.n}</h4>
+    ${p.lista ? `<div class="pvp">Precio de venta sugerido: ${fmt(p.lista)}</div>` : ''}
+    <div class="stepper">
+      <button onclick="mod('${p.id}',-1)">&minus;</button>
+      <div class="qty" id="qty-${p.id}">0</div>
+      <button onclick="mod('${p.id}',1)">+</button>
+    </div>
+  </div>`;
+}
+
+document.getElementById("grid-blanca").innerHTML =
+  BLANCA.map(p => cardHTML(p, fmt(p.lista/2), p.nuevo)).join("");
+
+document.getElementById("grid-tinturas").innerHTML =
+  TINTURAS.map(p => cardHTML(p, "50ml", false)).join("");
+
+/* =================== LÓGICA =================== */
+const totalTinturas = () => TINTURAS.reduce((s,p) => s + qty[p.id], 0);
+const precioTintura = () => totalTinturas() >= 48 ? REPO_48 : REPO_24;
+
+function totales(){
+  let items = 0, total = 0;
+  total += qty.stand * PRECIO_STAND; items += qty.stand;
+  const tt = totalTinturas();
+  total += tt * precioTintura(); items += tt;
+  BLANCA.forEach(p => { total += qty[p.id] * p.lista/2; items += qty[p.id]; });
+  return {items, total};
+}
+
+function mod(id, d){
+  qty[id] = Math.max(0, qty[id] + d);
+  document.getElementById("qty-" + id).textContent = qty[id];
+  refresh();
+}
+
+function refresh(){
+  const {items, total} = totales();
+  const bar = document.getElementById("cart-bar");
+  bar.classList.toggle("visible", items > 0);
+  document.getElementById("bar-items").textContent = items + (items === 1 ? " producto" : " productos");
+  document.getElementById("bar-total").textContent = fmt(total);
+
+  const tt = totalTinturas();
+  const estado = document.getElementById("repo-estado");
+  if (tt === 0)      estado.textContent = "Elegí al menos 24 frascos (combinalos como quieras)";
+  else if (tt < 24)  estado.textContent = `Llevás ${tt} — te faltan ${24-tt} frascos para completar la reposición mínima de 24`;
+  else if (tt < 48)  estado.textContent = `Llevás ${tt} frascos a ${fmt(REPO_24)} c/u — con ${48-tt} más pasás a ${fmt(REPO_48)} c/u`;
+  else               estado.textContent = `Llevás ${tt} frascos a ${fmt(REPO_48)} c/u`;
+}
+
+/* =================== PEDIDO =================== */
+function lineasPedido(){
+  const lineas = [];
+  if (qty.stand > 0) lineas.push({n:"Stand Mayorista Adaptógenos", q:qty.stand, pu:PRECIO_STAND});
+  TINTURAS.forEach(p => { if (qty[p.id] > 0) lineas.push({n:"Adaptógeno 50ml - " + p.n, q:qty[p.id], pu:precioTintura()}); });
+  BLANCA.forEach(p =>  { if (qty[p.id] > 0) lineas.push({n:p.n, q:qty[p.id], pu:p.lista/2}); });
+  return lineas;
+}
+
+function abrirPedido(){
+  const cont = document.getElementById("lineas-pedido");
+  cont.innerHTML = lineasPedido().map(l =>
+    `<div class="linea-pedido"><span>${l.n}</span><span class="cant">${l.q} × ${fmt(l.pu)} = <b>${fmt(l.q*l.pu)}</b></span></div>`
+  ).join("");
+  document.getElementById("modal-total").textContent = fmt(totales().total);
+
+  const tt = totalTinturas();
+  const aviso = document.getElementById("aviso-repo");
+  if (tt > 0 && tt < 24){
+    aviso.style.display = "block";
+    aviso.textContent = `⚠ La reposición de adaptógenos es de mínimo 24 frascos (llevás ${tt}).`;
+  } else aviso.style.display = "none";
+
+  document.getElementById("overlay").classList.add("open");
+}
+function cerrarPedido(){ document.getElementById("overlay").classList.remove("open"); }
+document.getElementById("overlay").addEventListener("click", e => { if (e.target.id === "overlay") cerrarPedido(); });
+
+function textoPedido(){
+  const comercio = document.getElementById("f-comercio").value.trim();
+  const nombre = document.getElementById("f-nombre").value.trim();
+  let t = "*PEDIDO MAYORISTA — KAYA*\n\n";
+  if (comercio) t += "Comercio: " + comercio + "\n";
+  if (nombre)   t += "Contacto: " + nombre + "\n";
+  t += "\n";
+  lineasPedido().forEach(l => { t += `▪ ${l.q} × ${l.n} — ${fmt(l.q*l.pu)}\n`; });
+  t += `\n*TOTAL: ${fmt(totales().total)}*`;
+  return t;
+}
+
+function enviarWA(){
+  window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(textoPedido()), "_blank");
+}
+function enviarMail(){
+  const asunto = "Pedido mayorista KAYA" + (document.getElementById("f-comercio").value.trim() ? " — " + document.getElementById("f-comercio").value.trim() : "");
+  window.location.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(asunto) + "&body=" + encodeURIComponent(textoPedido().replaceAll("*",""));
+}
+</script>
+</body>
+</html>
