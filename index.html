@@ -100,7 +100,7 @@
   .aviso{background:var(--crema-suave);border:1px solid #e0d8ba;border-radius:8px;padding:10px 14px;font-size:13px;margin:12px 0}
   .total-linea{display:flex;justify-content:space-between;font-size:17px;font-weight:700;padding:14px 0 6px}
   .modal-body label{font-size:12.5px;font-weight:700;display:block;margin:10px 0 4px}
-  .modal-body input{width:100%;border:1px solid #ccc;border-radius:7px;padding:9px 12px;font-family:inherit;font-size:14px}
+  .modal-body input,.modal-body textarea{width:100%;border:1px solid #ccc;border-radius:7px;padding:9px 12px;font-family:inherit;font-size:14px;resize:vertical}
   .modal-foot{padding:14px 24px 20px;border-top:1px solid #eee;display:flex;flex-direction:column;gap:9px}
   .btn-wa{background:var(--negro);color:#fff;padding:14px;font-size:15px;display:flex;align-items:center;justify-content:center;gap:9px}
   .btn-mail{background:#fff;color:var(--negro);border:1px solid var(--negro);padding:11px;font-size:13.5px}
@@ -227,6 +227,10 @@
       <input id="f-comercio" placeholder="Ej: Farmacia del Centro">
       <label>Tu nombre</label>
       <input id="f-nombre" placeholder="Ej: María Pérez">
+      <label>Domicilio de envío</label>
+      <input id="f-domicilio" placeholder="Calle, número, localidad y provincia">
+      <label>Observaciones</label>
+      <textarea id="f-obs" rows="2" placeholder="Horarios de recepción, aclaraciones, etc. (opcional)"></textarea>
     </div>
     <div class="modal-foot">
       <button class="btn btn-wa" id="btn-wa" onclick="enviarWA()">
@@ -392,12 +396,16 @@ document.getElementById("overlay").addEventListener("click", e => { if (e.target
 function textoPedido(){
   const comercio = document.getElementById("f-comercio").value.trim();
   const nombre = document.getElementById("f-nombre").value.trim();
+  const domicilio = document.getElementById("f-domicilio").value.trim();
+  const obs = document.getElementById("f-obs").value.trim();
   let t = "*PEDIDO MAYORISTA — KAYA*\n\n";
-  if (comercio) t += "Comercio: " + comercio + "\n";
-  if (nombre)   t += "Contacto: " + nombre + "\n";
+  if (comercio)  t += "Comercio: " + comercio + "\n";
+  if (nombre)    t += "Contacto: " + nombre + "\n";
+  if (domicilio) t += "Envío a: " + domicilio + "\n";
   t += "\n";
-  lineasPedido().forEach(l => { t += `▪ ${l.q} × ${l.n} — ${fmt(l.q*l.pu)}\n`; });
+  lineasPedido().forEach(l => { t += `- ${l.q} × ${l.n} — ${fmt(l.q*l.pu)}\n`; });
   t += `\n*TOTAL: ${fmt(totales().total)}*`;
+  if (obs) t += "\n\nObservaciones: " + obs;
   return t;
 }
 
