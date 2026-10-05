@@ -77,6 +77,8 @@
   .grid-tinturas{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:20px}
   .grid-tinturas .card h4{font-size:13px;min-height:30px}
   .grid-tinturas .chip-precio{font-size:13.5px;padding:4px 11px}
+  .titulo-novedades{font-family:'Cinzel',serif;letter-spacing:.12em;text-transform:uppercase;font-size:15px;text-align:center;margin:40px 0 6px}
+  .sub-novedades{font-size:13px;color:var(--gris);text-align:center;margin-bottom:18px}
 
   /* ---------- cart bar ---------- */
   .cart-bar{position:fixed;bottom:0;left:0;right:0;background:var(--negro);color:#fff;display:none;align-items:center;justify-content:space-between;padding:13px 22px;z-index:50;gap:14px}
@@ -164,7 +166,7 @@
       <h3>Stand Mayorista Adaptógenos</h3>
       <ul>
         <li>1 stand para mesa</li>
-        <li>24 adaptógenos (3 de cada variedad) de 50ml</li>
+        <li>24 adaptógenos de 50ml (3 de cada una de las 8 variedades clásicas)</li>
         <li>24 cajas (para cada adaptógeno)</li>
         <li>1 libro explicativo con los kits y combinaciones</li>
         <li>Stickers</li>
@@ -193,6 +195,9 @@
     <div class="tarifa">48 frascos: <b>$12.000</b> c/u</div>
   </div>
   <div class="grid grid-tinturas" id="grid-tinturas"></div>
+  <div class="titulo-novedades">Novedades &middot; no incluidas en el stand</div>
+  <p class="sub-novedades">Sumalas a tu reposición al mismo precio por frasco: cuentan para el mínimo y para el escalón de 48.</p>
+  <div class="grid grid-tinturas" id="grid-novedades"></div>
   <p style="font-size:12.5px;color:var(--gris);margin-top:16px;font-style:italic">Incluye las cajitas y stickers.</p>
 </section>
 
@@ -332,7 +337,9 @@ document.getElementById("grid-blanca").innerHTML =
   BLANCA.map(p => cardHTML(p, fmt(precioMayorista(p)), p.nuevo)).join("");
 
 document.getElementById("grid-tinturas").innerHTML =
-  TINTURAS.map(p => cardHTML(p, "50ml", p.nuevo)).join("");
+  TINTURAS.filter(p => !p.nuevo).map(p => cardHTML(p, "50ml", false)).join("");
+document.getElementById("grid-novedades").innerHTML =
+  TINTURAS.filter(p => p.nuevo).map(p => cardHTML(p, "50ml", true)).join("");
 
 /* =================== LÓGICA =================== */
 const totalTinturas = () => TINTURAS.reduce((s,p) => s + qty[p.id], 0);
