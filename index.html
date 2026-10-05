@@ -269,13 +269,14 @@ const CDN = "https://acdn-us.mitiendanube.com/stores/004/998/152/products/";
 /* Línea blanca: precio mayorista = 40% del precio de lista de kaya.com.ar, redondeado a centenas (mismo criterio que EntreSano) */
 const BLANCA = [
   {id:"serum",   n:"Tremella Serum",                             lista:70000,  nuevo:true,  img:"serum-52baae101dbcff32f817895927832478-1024-1024.webp"},
+  {id:"joj125",  n:"Aceite de Jojoba - 125ml",                   lista:95000,  nuevo:false, img:"37-932f77265230dbec3d17456186663148-1024-1024.webp"},
+  {id:"joj60",   n:"Aceite de Jojoba - 60ml",                    lista:55000,  nuevo:false, img:"40-a7adea126884c5496117456189894306-1024-1024.webp"},
+  {id:"joj30",   n:"Aceite de Jojoba - 30ml",                    lista:29500,  nuevo:false, img:"39-5ff083a4150008f7e417456192123999-1024-1024.webp"},
   {id:"balsamo", n:"Bálsamo Labial Tremella",                    lista:32000,  nuevo:true,  img:"balsamo-2-32873777f59dadd9df17895927170940-1024-1024.webp"},
   {id:"leche",   n:"Leche de Limpieza Facial - Rosas",           lista:45000,  nuevo:false, img:"leche-de-limpieza-d64865a5dab369e14017795445828310-1024-1024.webp"},
   {id:"jabon",   n:"Jabón Líquido Corporal - Mango y Pitanga",   lista:40000,  nuevo:false, img:"jabon-liquido-ffa351ce858a6c70d417795445652413-1024-1024.webp"},
   {id:"shampoo", n:"Shampoo - Coco y Vainilla",                  lista:40000,  nuevo:false, img:"shampoo-78acc70df9877979c417795445475589-1024-1024.webp"},
   {id:"acond",   n:"Acondicionador - Coco y Karité",             lista:40000,  nuevo:false, img:"acondicionador-ea887f214a1f454b8e17795445272136-1024-1024.webp"},
-  {id:"neceser", n:"Neceser KAYA®",                         lista:50000,  nuevo:false, img:"neceser1-6d27aeb7142c704a1817741005380209-1024-1024.webp"},
-  {id:"bolso",   n:"Bolso KAYA®",                           lista:100000, nuevo:false, img:"bolso1-2b3162a15885ab1cb217741002522196-1024-1024.webp"},
   {id:"mosqueta",n:"Aceite de Rosa Mosqueta - 30ml",             lista:40000,  nuevo:false, img:"kaya-2025-05_12-baja-632c832d1f3c3818a117498374609591-1024-1024.webp"},
   {id:"mist",    n:"Mist del Bosque - Bruma Botánica",           lista:35000,  nuevo:false, img:"kaya-2025-05_18-baja-7f82218d53dd06853d17498369610573-1024-1024.webp"},
   {id:"perfume", n:"Perfume Oil - Lavanda",                      lista:30000,  nuevo:false, img:"45-8cfa336a4ec72cd1ac17456132434494-1024-1024.webp"},
@@ -283,9 +284,8 @@ const BLANCA = [
   {id:"antiage", n:"Crema Antiage - Día & Noche",                lista:40000,  nuevo:false, img:"54-a1f5b5c2e966ec8de017787722185066-1024-1024.webp"},
   {id:"butter",  n:"Body Butter - Mango y Pitanga",              lista:40000,  nuevo:false, img:"42-82ec9f28026b9786a417456181564242-1024-1024.webp"},
   {id:"micelar", n:"Agua Micelar de Rosas - 125ml",              lista:30000,  nuevo:false, img:"38-7a24502be5c02dc6c017456185218638-1024-1024.webp"},
-  {id:"joj125",  n:"Aceite de Jojoba - 125ml",                   lista:95000,  nuevo:false, img:"37-932f77265230dbec3d17456186663148-1024-1024.webp"},
-  {id:"joj60",   n:"Aceite de Jojoba - 60ml",                    lista:55000,  nuevo:false, img:"40-a7adea126884c5496117456189894306-1024-1024.webp"},
-  {id:"joj30",   n:"Aceite de Jojoba - 30ml",                    lista:29500,  nuevo:false, img:"39-5ff083a4150008f7e417456192123999-1024-1024.webp"},
+  {id:"neceser", n:"Neceser KAYA®",                         lista:50000,  nuevo:false, img:"neceser1-6d27aeb7142c704a1817741005380209-1024-1024.webp"},
+  {id:"bolso",   n:"Bolso KAYA®",                           lista:100000, nuevo:false, img:"bolso1-2b3162a15885ab1cb217741002522196-1024-1024.webp"},
 ];
 const precioMayorista = p => Math.round(p.lista * 0.40 / 100) * 100;
 
